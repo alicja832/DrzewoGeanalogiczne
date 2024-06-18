@@ -137,11 +137,3 @@ DROP TABLE IF EXISTS GDrzewo;
 
 
 case
-
-FROM Gdrzewo;
---raporty 1) po prostu select - moze byc z aplikacji
---2) raport nr 2 : wypisz dzieci danej osoby - jakis join- moze byc w c#
----3) znajdz malzonka
---4) zrobienie testow -- poziom aplikacji
-SELECT CzlonekId.ToString() as Id,Poziom,Imie,Nazwisko,ImieMalzonka,NazwiskoMalzonka , (YEAR(GETDATE()) - YEAR(DataUrodzenia)) as wiek from GDrzewo WHERE DataSmierci is  NULL;
- SELECT CzlonekId.ToString() as Id,Poziom,Imie,Nazwisko,ImieMalzonka,NazwiskoMalzonka,(YEAR(DataSmierci) - YEAR(DataUrodzenia)) as lata from GDrzewo WHERE DataSmierci is not NULL;

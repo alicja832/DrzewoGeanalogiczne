@@ -50,14 +50,22 @@
             label3 = new Label();
             textBox1 = new TextBox();
             label2 = new Label();
+            panel3 = new Panel();
+            label13 = new Label();
             label1 = new Label();
             button2 = new Button();
             panel2 = new Panel();
+            panel4 = new Panel();
+            label14 = new Label();
+            button6 = new Button();
+            button5 = new Button();
             label12 = new Label();
             button3 = new Button();
             button4 = new Button();
             panel1.SuspendLayout();
+            panel3.SuspendLayout();
             panel2.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // Buttonstworz
@@ -102,7 +110,7 @@
             // 
             label11.AutoSize = true;
             label11.BackColor = SystemColors.ActiveCaption;
-            label11.Location = new Point(353, 293);
+            label11.Location = new Point(350, 293);
             label11.Name = "label11";
             label11.Size = new Size(118, 15);
             label11.TabIndex = 12;
@@ -257,6 +265,24 @@
             label2.TabIndex = 0;
             label2.Text = "Dodawanie członka";
             // 
+            // panel3
+            // 
+            panel3.Controls.Add(label13);
+            panel3.Location = new Point(44, 104);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(550, 326);
+            panel3.TabIndex = 2;
+            // 
+            // label13
+            // 
+            label13.BackColor = SystemColors.InactiveCaption;
+            label13.Font = new Font("Segoe UI", 12F);
+            label13.Location = new Point(67, 92);
+            label13.Name = "label13";
+            label13.Size = new Size(431, 135);
+            label13.TabIndex = 0;
+            label13.Text = resources.GetString("label13.Text");
+            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -271,7 +297,7 @@
             // button2
             // 
             button2.BackColor = SystemColors.GradientInactiveCaption;
-            button2.Location = new Point(625, 298);
+            button2.Location = new Point(642, 298);
             button2.Name = "button2";
             button2.Size = new Size(146, 88);
             button2.TabIndex = 3;
@@ -282,19 +308,65 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(panel4);
+            panel2.Controls.Add(button5);
             panel2.Controls.Add(label12);
             panel2.Controls.Add(button3);
             panel2.Location = new Point(44, 104);
             panel2.Name = "panel2";
-            panel2.Size = new Size(547, 326);
+            panel2.Size = new Size(647, 326);
             panel2.TabIndex = 4;
             panel2.Visible = false;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = SystemColors.ActiveCaption;
+            panel4.BorderStyle = BorderStyle.Fixed3D;
+            panel4.Controls.Add(label14);
+            panel4.Controls.Add(button6);
+            panel4.Location = new Point(94, 48);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(456, 201);
+            panel4.TabIndex = 7;
+            panel4.Visible = false;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(7, 15);
+            label14.Name = "label14";
+            label14.Size = new Size(193, 15);
+            label14.TabIndex = 1;
+            label14.Text = "Nie udalo się wygenerować raportu";
+            label14.Visible = false;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(367, 30);
+            button6.Name = "button6";
+            button6.Size = new Size(75, 23);
+            button6.TabIndex = 0;
+            button6.Text = "Zamknij";
+            button6.UseVisualStyleBackColor = true;
+            button6.Visible = false;
+            button6.Click += button6_Click;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(45, 282);
+            button5.Margin = new Padding(3, 2, 3, 2);
+            button5.Name = "button5";
+            button5.Size = new Size(134, 22);
+            button5.TabIndex = 6;
+            button5.Text = "Raport";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // label12
             // 
             label12.AutoSize = true;
             label12.BackColor = SystemColors.ActiveCaption;
-            label12.Location = new Point(410, 278);
+            label12.Location = new Point(494, 289);
             label12.Name = "label12";
             label12.Size = new Size(109, 15);
             label12.TabIndex = 1;
@@ -303,7 +375,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(150, 270);
+            button3.Location = new Point(228, 273);
             button3.Name = "button3";
             button3.Size = new Size(214, 38);
             button3.TabIndex = 0;
@@ -313,9 +385,9 @@
             // 
             // button4
             // 
-            button4.Location = new Point(625, 298);
+            button4.Location = new Point(697, 298);
             button4.Name = "button4";
-            button4.Size = new Size(146, 88);
+            button4.Size = new Size(91, 88);
             button4.TabIndex = 5;
             button4.Text = "Wróć do dodawania";
             button4.UseVisualStyleBackColor = true;
@@ -334,6 +406,7 @@
             Controls.Add(button2);
             Controls.Add(label1);
             Controls.Add(panel1);
+            Controls.Add(panel3);
             Controls.Add(Buttonstworz);
             HelpButton = true;
             ImeMode = ImeMode.Hiragana;
@@ -341,8 +414,11 @@
             Text = "Drzewo Geanalogiczne";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel3.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -375,9 +451,17 @@
         private Button button2;
         private Panel panel2;
         private CheckBox checkBox1;
-        List<CheckBox> checkboxes;
         private Button button3;
+        Dictionary<int,List<CheckBox>> checkboxes;
+        Dictionary<int, List<Label>> labels;
         private Label label12;
         private Button button4;
+        private Panel panel3;
+        private Label label13;
+        private Button button5;
+        private Panel panel4;
+        private Button button6;
+        private Label label14;
+        private Label label16;
     }
 }
